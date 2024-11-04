@@ -7,7 +7,7 @@ def lambda_handler(event, context):
     if isinstance(body, str):
         body = json.loads(body)
 
-    nombre_bucket = body.get('nombreBucket', '')
+    nombre_bucket = body.get('nombre', '')
 
     s3 = boto3.client('s3')
     s3.create_bucket(Bucket=nombre_bucket)
