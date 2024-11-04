@@ -1,7 +1,12 @@
 import boto3
 
 def lambda_handler(event, context):
-    nombre_bucket = event['body']['nombreBucket']
+    body = event.get('body', {})
+
+    if isinstance(body, str):
+        body = json.loads(body)
+
+    nombre_bucket = body.get('nombreBucket', '')
 
     s3 = boto3.client('s3')
     s3.create_bucket(Bucket=nombre_bucket)
